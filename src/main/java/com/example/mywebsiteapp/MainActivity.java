@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -32,22 +33,26 @@ public class MainActivity extends AppCompatActivity {
     final String GET_ALL = "/getallvisitors";
     final String TEST_LINK = "/test";
     final String AUTHENTICATE = "/authenticate";
-
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        progressBar = (ProgressBar) findViewById(R.id.progress_circular);
         final TextInputEditText usernameInput = findViewById(R.id.userNameInput);
         final TextInputEditText passwordInput = findViewById(R.id.passwordInput);
         Button logInBtn  = findViewById(R.id.buttonLogIn);
+        progressBar.setVisibility(View.INVISIBLE);
         logInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
                 if(username.length()<passUserLength || password.length()<passUserLength ){
                 Log.v("TEST" , "Password or username not valid");
+                progressBar.setVisibility(View.INVISIBLE);
             }
                 else {
                     Log.v("TEST", "user details passed");
@@ -57,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-        public void login(String username, String password) {
+        private void login(String username, String password) {
             String autchenaticateUrl = LOCAL_URL_BASE + AUTHENTICATE;
             JSONObject jsonBody = new JSONObject();
             try {
@@ -68,11 +73,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
+
                             JSONObject jwtJSON = new JSONObject(response);
                             jwt = jwtJSON.getString("jwt");
                             Log.v("TEST" , "we got pure jwt: " + jwt);
+                            progressBar.setVisibility(View.INVISIBLE);
                             // Starting new activity from here :)
-                            
+
                         }catch (JSONException e){
                             Log.v("TEST" , "JWT json parse failed");
                         }
@@ -81,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.v("TEST", "FAILED " + error.toString());
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 }) {
                     @Override
@@ -104,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
 
 
 
