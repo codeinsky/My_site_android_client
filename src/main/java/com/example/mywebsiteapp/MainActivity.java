@@ -3,6 +3,7 @@ package com.example.mywebsiteapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 String username = usernameInput.getText().toString();
                 String password = passwordInput.getText().toString();
+
                 if(username.length()<passUserLength || password.length()<passUserLength ){
                 Log.v("TEST" , "Password or username not valid");
                 progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getApplicationContext() , "user name or password can not be empty" , Toast.LENGTH_SHORT ).show();
             }
                 else {
                     Log.v("TEST", "user details passed");
@@ -77,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jwtJSON = new JSONObject(response);
                             jwt = jwtJSON.getString("jwt");
                             Log.v("TEST" , "we got pure jwt: " + jwt);
+                            Intent homeScreen = new Intent(MainActivity.this , HomeActivity.class);
                             progressBar.setVisibility(View.INVISIBLE);
+                            startActivity(homeScreen);
                             // Starting new activity from here :)
 
                         }catch (JSONException e){
@@ -88,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.v("TEST", "FAILED " + error.toString());
+                        Toast.makeText(getApplicationContext(),"Log-In failed. Wrong user details, try again", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.INVISIBLE);
                     }
                 }) {
