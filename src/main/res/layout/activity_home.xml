@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#def3f8"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <Button
         android:layout_width="wrap_content"
@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:text="Likes:"/>
         <TextView
+            android:textStyle="bold"
             android:id="@+id/likes_count"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
@@ -72,6 +73,7 @@
             android:layout_height="wrap_content"
             android:text="Dislikes: "/>
         <TextView
+            android:textStyle="bold"
             android:id="@+id/dislike_counts"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
@@ -109,6 +111,7 @@
                 android:text="Visitor"/>
 
            <Button
+               android:id="@+id/vote_btn"
                android:layout_margin="5dp"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"

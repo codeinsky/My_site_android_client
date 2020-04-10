@@ -1,6 +1,7 @@
-package com.example.mywebsiteapp;
+package com.example.mywebsiteapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +15,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mywebsiteapp.R;
+import com.example.mywebsiteapp.dialogFragments.VotesReportDialogFragment;
 
 public class HomeActivity extends AppCompatActivity {
     private Button logOut;
     private TextView visitorsCountView;
     private TextView likesCountView;
     private TextView dislikesCountView;
+    private Button voteReportBtn;
     private final String baseURL = "http://10.0.2.2:8181";
     private final String getVisitorsCountURL = "/android/getvisitorcount";
     private final String getLikesCountURL    = "/android/getlikescount";
@@ -33,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         visitorsCountView = (TextView)findViewById(R.id.visitor_count);
         likesCountView = (TextView)findViewById(R.id.likes_count);
         dislikesCountView = (TextView)findViewById(R.id.dislike_counts);
+        voteReportBtn = (Button)findViewById(R.id.vote_btn);
         dislikesCountView.setText("on request");
         visitorsCountView.setText("on request");
         likesCountView.setText("on request");
@@ -45,6 +50,14 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent logIn = new Intent(HomeActivity.this , MainActivity.class);
                 startActivity(logIn);
+            }
+        });
+
+        voteReportBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment voteReport = new VotesReportDialogFragment();
+                voteReport.show(getSupportFragmentManager().beginTransaction() , "voteReport");
             }
         });
 

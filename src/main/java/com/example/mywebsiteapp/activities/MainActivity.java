@@ -1,8 +1,7 @@
-package com.example.mywebsiteapp;
+package com.example.mywebsiteapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mywebsiteapp.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
