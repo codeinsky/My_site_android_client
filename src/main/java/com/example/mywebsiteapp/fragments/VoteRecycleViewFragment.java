@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.mywebsiteapp.R;
 import com.example.mywebsiteapp.adapters.VoteRecycleViewAdapter;
+import com.example.mywebsiteapp.services.VoteService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +31,7 @@ public class VoteRecycleViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_vote_recycle_view, container, false);
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view_vote_report);
         recyclerView.setHasFixedSize(true);
-        VoteRecycleViewAdapter adapter = new VoteRecycleViewAdapter();
+        VoteRecycleViewAdapter adapter = new VoteRecycleViewAdapter(VoteService.getInstance().getVotes());
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

@@ -6,16 +6,17 @@ public class VoteModel {
     private int id;
     private boolean liked ;
     private boolean disliked;
-    private Date date;
+    private String date;
     private String ip;
 
-    public VoteModel(int id, boolean liked, boolean disliked, Date date, String ip) {
+    public VoteModel(int id, boolean liked, boolean disliked, String date, String ip) {
         this.id = id;
         this.liked = liked;
         this.disliked = disliked;
         this.date = date;
         this.ip = ip;
     }
+
 
     public int getId() {
         return id;
@@ -41,11 +42,11 @@ public class VoteModel {
         this.disliked = disliked;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
