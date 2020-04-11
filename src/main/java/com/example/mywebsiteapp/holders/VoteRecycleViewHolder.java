@@ -2,10 +2,8 @@ package com.example.mywebsiteapp.holders;
 
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.mywebsiteapp.R;
 import com.example.mywebsiteapp.model.VoteModel;
 
@@ -15,6 +13,7 @@ public class VoteRecycleViewHolder extends RecyclerView.ViewHolder {
     private TextView like;
     private TextView date;
     private TextView ip;
+
     public VoteRecycleViewHolder(@NonNull View itemView) {
         super(itemView);
         this.id = (TextView)itemView.findViewById(R.id.vote_id);

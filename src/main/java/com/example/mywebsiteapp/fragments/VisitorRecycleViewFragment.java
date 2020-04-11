@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mywebsiteapp.R;
+import com.example.mywebsiteapp.adapters.VisitorRecycleViewAdapter;
+import com.example.mywebsiteapp.services.VisitorService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,8 @@ public class VisitorRecycleViewFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_visitor_recycle_view, container, false);
         RecyclerView visitorReportRecycleView = (RecyclerView) view.findViewById(R.id.visitor_view_recycle_report);
         visitorReportRecycleView.setHasFixedSize(true);
+        VisitorRecycleViewAdapter visitorRecycleViewAdapter = new VisitorRecycleViewAdapter(VisitorService.getInstance().getVisitors());
+        visitorReportRecycleView.setAdapter(visitorRecycleViewAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         visitorReportRecycleView.setLayoutManager(linearLayoutManager);
