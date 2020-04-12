@@ -1,5 +1,6 @@
 package com.example.mywebsiteapp.holders;
 
+import android.text.style.BackgroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -13,7 +14,6 @@ public class VoteRecycleViewHolder extends RecyclerView.ViewHolder {
     private TextView like;
     private TextView date;
     private TextView ip;
-
     public VoteRecycleViewHolder(@NonNull View itemView) {
         super(itemView);
         this.id = (TextView)itemView.findViewById(R.id.vote_id);

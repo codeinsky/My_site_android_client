@@ -12,7 +12,7 @@ public class AboutMeService {
     }
     public AboutMeService() {
     }
-    public static ArrayList<AboutMeModel> getAboutMe(){
+    public  ArrayList<AboutMeModel> getAboutMe(){
         ArrayList<AboutMeModel> aboutMes = new ArrayList<AboutMeModel>();
         aboutMes.add(new AboutMeModel("1" , "Education" , "John Bryce" , "JAVA EE"));
         aboutMes.add(new AboutMeModel("2" , "Education" , "Udemy" , "Angular"));
