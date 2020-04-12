@@ -16,7 +16,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/about_me_update_fragment"/>
+        android:id="@+id/about_me_fragment"/>
 
     <Button
         android:id="@+id/about_me_fragment_close_btn"
