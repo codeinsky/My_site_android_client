@@ -1,11 +1,12 @@
 package com.example.mywebsiteapp.dialogFragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -24,7 +25,22 @@ public class ProjectsUpdateDialogFragment extends DialogFragment {
             ProjectRecycleViewFragment projectFragment = new ProjectRecycleViewFragment();
             fm.beginTransaction().add(R.id.projects_fragment , projectFragment).commit();
         }
+        final EditText projectName = view.findViewById(R.id.project_name_input);
+        final EditText projectComment = view.findViewById(R.id.project_comment_input);
+        final EditText projectLinks = view.findViewById(R.id.projects_links_input);
+        final EditText projectSystems = view.findViewById(R.id.projects_platfroms_input);
+        Button createProjectBtn = (Button)view.findViewById(R.id.create_project_btn);
+        createProjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("TEST", "fire post request with new project");
+                Log.v("TEST" , projectName.getText().toString() + " , " +
+                                         projectComment.getText().toString() + " , " +
+                                         projectLinks.getText().toString() + " , " +
+                                         projectSystems.getText().toString());
 
+            }
+        });
         Button closeProjectBtn = (Button)view.findViewById(R.id.projects_update_close_btn);
         closeProjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override

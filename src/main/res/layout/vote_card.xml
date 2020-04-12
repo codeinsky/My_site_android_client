@@ -57,7 +57,6 @@
                 android:id="@+id/vote_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#D32E2E"
                 android:text="Yes/No" />
 
         </LinearLayout>

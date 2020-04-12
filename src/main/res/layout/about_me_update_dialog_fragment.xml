@@ -14,15 +14,60 @@
         android:layout_margin="10dp"
         android:textStyle="bold"/>
     <FrameLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:id="@+id/about_me_fragment"/>
 
-    <Button
-        android:id="@+id/about_me_fragment_close_btn"
+    <LinearLayout
+        android:layout_margin="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_border_corners">
+
+
+        <EditText
+            android:id="@+id/about_me_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Section"/>
+
+
+        <EditText
+        android:id="@+id/about_me_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Details"/>
+
+        <EditText
+            android:id="@+id/about_me_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Comment" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/about_me_fragment_close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="CLOSE"/>
+
+        <Button
+            android:id="@+id/about_me_update_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CREATE"/>
+    </LinearLayout>
 
 
 

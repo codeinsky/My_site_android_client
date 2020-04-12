@@ -1,8 +1,10 @@
 package com.example.mywebsiteapp.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +25,15 @@ public class AboutMeRecycleViewAdapter extends RecyclerView.Adapter<AboutMeRecyc
     @NonNull
     @Override
     public AboutMeRecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.aboute_me_card , parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.aboute_me_card , parent, false);
+        final TextView id = view.findViewById(R.id.about_me_id);
+        final TextView deleteAboutMe = (TextView)view.findViewById(R.id.delete_about_me);
+        deleteAboutMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("TEST" , "delete " + id.getText().toString());
+            }
+        });
         return new AboutMeRecycleViewHolder(view);
     }
 

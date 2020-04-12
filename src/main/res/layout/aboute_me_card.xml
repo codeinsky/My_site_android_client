@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="350dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:orientation="horizontal">
@@ -28,6 +28,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1" />
+            <TextView
+                android:id="@+id/delete_about_me"
+                android:clickable="true"
+                android:layout_marginLeft="200dp"
+                android:layout_marginRight="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:layout_gravity="right"/>
         </LinearLayout>
 
         <LinearLayout

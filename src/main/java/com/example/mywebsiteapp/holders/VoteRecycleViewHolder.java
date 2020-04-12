@@ -1,5 +1,6 @@
 package com.example.mywebsiteapp.holders;
 
+import android.graphics.Color;
 import android.text.style.BackgroundColorSpan;
 import android.view.View;
 import android.widget.TextView;
@@ -27,9 +28,11 @@ public class VoteRecycleViewHolder extends RecyclerView.ViewHolder {
         this.id.setText(String.valueOf(voteModel.getId()));
         if (voteModel.isLiked()) {
             this.like.setText("Like");
+            this.like.setTextColor(Color.GREEN);
         }
         else{
             this.like.setText("Dislike");
+            this.like.setTextColor(Color.RED);
         }
         this.date.setText(voteModel.getDate());
         this.ip.setText(voteModel.getIp());

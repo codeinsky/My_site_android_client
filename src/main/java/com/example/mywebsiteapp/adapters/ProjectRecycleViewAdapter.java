@@ -1,8 +1,10 @@
 package com.example.mywebsiteapp.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +27,14 @@ public class ProjectRecycleViewAdapter  extends RecyclerView.Adapter<ProjectRecy
     @Override
     public ProjectRecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.project_card , parent , false);
+        final TextView id = view.findViewById(R.id.card_project_id);
+        TextView deleteProjectBtn = view.findViewById(R.id.delete_project);
+        deleteProjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("TEST" , "Delete project with id: " + id.getText() );
+            }
+        });
         return new ProjectRecycleViewHolder(view);
     }
 
