@@ -1,9 +1,29 @@
 package com.example.mywebsiteapp.services;
+import android.content.Context;
+import android.util.Log;
+
+import androidx.fragment.app.Fragment;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.mywebsiteapp.dialogFragments.VisitorReportDialogFragment;
 import com.example.mywebsiteapp.model.VisitorModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class VisitorService {
+
+    private final String baseUrl = "http://10.0.2.2:8181";
+    private final String getVisitorsUrl = "/android/getallvisitors";
+    public static ArrayList<VisitorModel> visitorsFromServer = new ArrayList<>();
 
     private static VisitorService visitorService = new VisitorService();
 
@@ -25,5 +45,38 @@ public class VisitorService {
         visitors.add(new VisitorModel("6" , "04.07.2025" , "that is web visitor" , "145.55.23.65"));
         visitors.add(new VisitorModel("7" , "04.05.2025" , "that is web visitor" , "200.88.23.65"));
         return  visitors;
+    }
+
+    public void getVisitorsServer(Context context , final Fragment fragment){
+        String url = baseUrl + getVisitorsUrl;
+        JsonArrayRequest visitorRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.v("TEST", "Success");
+                for (int i = 0 ; i < response.length() ; i ++){
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Log.v("TEST" , obj.getString("ip"));
+                        visitorsFromServer.add(new VisitorModel(
+                                obj.getString("id"),
+                                obj.getString("date"),
+                                obj.getString("ip"),
+                                obj.getString("comment")
+
+                        ));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    VisitorReportDialogFragment frag = (VisitorReportDialogFragment)fragment;
+                    frag.onDataReceived();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("TEST" , "failed");
+            }
+        });
+        Volley.newRequestQueue(context).add(visitorRequest);
     }
 }

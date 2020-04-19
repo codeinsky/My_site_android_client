@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,10 @@ public class VisitorRecycleViewFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_visitor_recycle_view, container, false);
         RecyclerView visitorReportRecycleView = (RecyclerView) view.findViewById(R.id.visitor_view_recycle_report);
         visitorReportRecycleView.setHasFixedSize(true);
-        VisitorRecycleViewAdapter visitorRecycleViewAdapter = new VisitorRecycleViewAdapter(VisitorService.getInstance().getVisitors());
+        VisitorRecycleViewAdapter visitorRecycleViewAdapter = new VisitorRecycleViewAdapter(
+            //    VisitorService.getInstance().getVisitors()
+                VisitorService.visitorsFromServer
+        );
         visitorReportRecycleView.setAdapter(visitorRecycleViewAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -39,4 +43,6 @@ public class VisitorRecycleViewFragment extends Fragment {
         return view;
 
     }
+
+
 }

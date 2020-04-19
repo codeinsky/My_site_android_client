@@ -1,10 +1,28 @@
 package com.example.mywebsiteapp.services;
 
+import android.content.Context;
+import android.util.Log;
+
+import androidx.fragment.app.Fragment;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.mywebsiteapp.dialogFragments.ProjectsUpdateDialogFragment;
 import com.example.mywebsiteapp.model.ProjectModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class ProjectsService {
+    private final String baseUrl="http://10.0.2.2:8181";
+    public final String getAllProjectsUrl = "/android/getallprojects";
+    public static ArrayList<ProjectModel>  projectsFromServer = new ArrayList<>();
     private static ProjectsService projectsService = new ProjectsService();
     public  static ProjectsService getInstance(){
         return projectsService;
@@ -22,5 +40,39 @@ public class ProjectsService {
         projects.add(new ProjectModel("9" , "Android " , "WWW.git.com" , "MAC OS" , "SMS picker"));
         projects.add(new ProjectModel("8" , "Android " , "WWW.git.com" , "MAC OS" , "My web app client"));
         return  projects;
+    }
+
+    public  void getProjectSFromServer(Context context , final Fragment fragment){
+        String url = baseUrl + getAllProjectsUrl;
+        JsonArrayRequest getProjectsRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+                public void onResponse(JSONArray response) {
+                    Log.v("TEST" , "response success:" + response.length());
+                        for(int i = 0; i < response.length(); i ++) {
+                            try {
+                                JSONObject obj = response.getJSONObject(i);
+                                projectsFromServer.add(new ProjectModel(
+                                       obj.getString("id"),
+                                       obj.getString("name"),
+                                       obj.getString("system"),
+                                       obj.getString("comment"),
+                                        obj.getString("links")
+                                ));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            ProjectsUpdateDialogFragment frg = (ProjectsUpdateDialogFragment)fragment;
+                            frg.onDataReceived();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+            @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.v("TEST" , "Request failed: " + error.getMessage());
+                    }
+                });
+        Volley.newRequestQueue(context).add(getProjectsRequest);
+
     }
 }

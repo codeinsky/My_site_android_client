@@ -32,7 +32,10 @@ public class ProjectRecycleViewFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_project_recycle_view, container, false);
         RecyclerView projectsRecycleViews =  (RecyclerView) view.findViewById(R.id.projects_view_recycle);
         projectsRecycleViews.setHasFixedSize(true);
-        ProjectRecycleViewAdapter projectRecycleViewAdapter = new ProjectRecycleViewAdapter(ProjectsService.getInstance().getProjects());
+        ProjectRecycleViewAdapter projectRecycleViewAdapter = new ProjectRecycleViewAdapter(
+             //   ProjectsService.getInstance().getProjects()
+                ProjectsService.projectsFromServer
+        );
         projectsRecycleViews.setAdapter(projectRecycleViewAdapter);
         LinearLayoutManager lm = new LinearLayoutManager(container.getContext());
         lm.setOrientation(LinearLayoutManager.VERTICAL);

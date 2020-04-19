@@ -60,7 +60,7 @@
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Likes"/>
+            android:text="Likes" />
     </LinearLayout>
     <LinearLayout
         android:layout_margin="2dp"

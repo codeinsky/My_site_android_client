@@ -19,7 +19,7 @@ public class VisitorRecycleViewHolder extends RecyclerView.ViewHolder {
     public VisitorRecycleViewHolder(@NonNull View itemView) {
         super(itemView);
         id = itemView.findViewById(R.id.card_visitor_id);
-        ip = itemView.findViewById(R.id.card_visitor_comment);
+        ip = itemView.findViewById(R.id.card_visitor_ip);
         comment = itemView.findViewById(R.id.card_visitor_comment);
         date = itemView.findViewById(R.id.card_visitor_date);
 

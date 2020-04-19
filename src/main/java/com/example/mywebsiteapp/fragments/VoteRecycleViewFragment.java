@@ -31,7 +31,10 @@ public class VoteRecycleViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_vote_recycle_view, container, false);
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view_vote_report);
         recyclerView.setHasFixedSize(true);
-        VoteRecycleViewAdapter adapter = new VoteRecycleViewAdapter(VoteService.getInstance().getVotes());
+        VoteRecycleViewAdapter adapter = new VoteRecycleViewAdapter(
+             //   VoteService.getInstance().getVotes()
+                VoteService.votesFromServer
+        );
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

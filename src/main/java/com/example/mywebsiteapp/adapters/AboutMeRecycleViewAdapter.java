@@ -1,13 +1,19 @@
 package com.example.mywebsiteapp.adapters;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mywebsiteapp.R;
 import com.example.mywebsiteapp.holders.AboutMeRecycleViewHolder;
 import com.example.mywebsiteapp.model.AboutMeModel;
@@ -17,6 +23,8 @@ import java.util.ArrayList;
 
 public class AboutMeRecycleViewAdapter extends RecyclerView.Adapter<AboutMeRecycleViewHolder> {
     ArrayList<AboutMeModel> aboutMes;
+    private final String baseUr = "http://10.0.2.2:8181";
+    private final String urlDeleteAboutMe = "/android/deleteaboutme/";
 
     public AboutMeRecycleViewAdapter(ArrayList<AboutMeModel> aboutMes) {
         this.aboutMes = aboutMes;
@@ -32,6 +40,21 @@ public class AboutMeRecycleViewAdapter extends RecyclerView.Adapter<AboutMeRecyc
             @Override
             public void onClick(View v) {
                 Log.v("TEST" , "delete " + id.getText().toString());
+                String url = baseUr + urlDeleteAboutMe + id.getText().toString();
+
+                StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.v("TEST" , "request success");
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.v("TEST" , "request failed");
+                    }
+                });
+                Volley.newRequestQueue(view.getContext()).add(deleteRequest);
+
             }
         });
         return new AboutMeRecycleViewHolder(view);

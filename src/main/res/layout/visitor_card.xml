@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="5dp"
@@ -41,7 +41,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_margin="2dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <TextView
@@ -53,12 +53,12 @@
                 android:id="@+id/card_visitor_ip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="177.01.01.172" />
+                android:text="" />
 
         </LinearLayout>
         <LinearLayout
             android:layout_margin="2dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
