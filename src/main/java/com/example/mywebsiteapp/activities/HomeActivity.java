@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,6 +21,9 @@ import com.example.mywebsiteapp.dialogFragments.AboutMeUpdateDialogFragment;
 import com.example.mywebsiteapp.dialogFragments.ProjectsUpdateDialogFragment;
 import com.example.mywebsiteapp.dialogFragments.VisitorReportDialogFragment;
 import com.example.mywebsiteapp.dialogFragments.VotesReportDialogFragment;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
     private Button logOut;
@@ -101,16 +105,23 @@ public class HomeActivity extends AppCompatActivity {
         StringRequest getVisitorCount =  new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.v("TEST" , "visitor count is: " + response.toString());
                 visitorsCountView.setText(response.toString());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.v("TEST", "get visitor count request failed " + error.toString());
                 visitorsCountView.setText("request failed");
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type" , "application/json");
+                params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                return  params;
+            }
+        };
         Volley.newRequestQueue(this).add(getVisitorCount);
 
     }
@@ -128,7 +139,17 @@ public class HomeActivity extends AppCompatActivity {
                 likesCountView.setText("Request failed");
 
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type" , "application/json");
+                params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                return  params;
+            }
+        }
+                ;
         Volley.newRequestQueue(this).add(getLikesCount);
     }
 
@@ -144,7 +165,17 @@ public class HomeActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 dislikesCountView.setText("Request failed");
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type" , "application/json");
+                params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                return  params;
+            }
+
+        };
 
         Volley.newRequestQueue(this).add(getDislikesRequest);
     }

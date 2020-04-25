@@ -13,18 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mywebsiteapp.R;
+import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.fragments.AboutMeRecycleViewFragment;
 import com.example.mywebsiteapp.fragments.ProjectRecycleViewFragment;
 import com.example.mywebsiteapp.services.ProjectsService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProjectsUpdateDialogFragment extends DialogFragment {
     final String baseUrl = "http://10.0.2.2:8181";
@@ -87,7 +93,16 @@ public class ProjectsUpdateDialogFragment extends DialogFragment {
                         Toast.makeText(getContext() , "Project create failed", Toast.LENGTH_SHORT).show();
                         ProjectsService.getInstance().getProjectSFromServer(getContext() , projectsUpdateDialogFragment);
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type" , "application/json");
+                        params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                        return  params;
+                    }
+                };
                 Volley.newRequestQueue(getContext()).add(createProject);
 
             }

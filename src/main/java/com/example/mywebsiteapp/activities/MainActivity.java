@@ -26,7 +26,7 @@ import java.io.UnsupportedEncodingException;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    final public static String key="key ";
     public static String jwt ;
     final int passUserLength = 3;
     final String LOCAL_URL_BASE = "http://10.0.2.2:8181";
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     final String TEST_LINK = "/test";
     final String AUTHENTICATE = "/authenticate";
     private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

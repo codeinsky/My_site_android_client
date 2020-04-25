@@ -14,18 +14,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mywebsiteapp.R;
+import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.fragments.AboutMeRecycleViewFragment;
 import com.example.mywebsiteapp.services.AboutMeService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AboutMeUpdateDialogFragment extends DialogFragment {
@@ -84,7 +89,16 @@ public class AboutMeUpdateDialogFragment extends DialogFragment {
                                 AboutMeService.getInstance().getAboutMeServer(getContext(), aboutMeUpdateDialogFragment);
                             }
                         }
-                );
+                )
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type" , "application/json");
+                        params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                        return  params;
+                    }
+                };
 
                 Volley.newRequestQueue(getContext()).add(jsonObjectRequest);
 

@@ -9,16 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mywebsiteapp.R;
+import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.holders.AboutMeRecycleViewHolder;
 import com.example.mywebsiteapp.model.AboutMeModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AboutMeRecycleViewAdapter extends RecyclerView.Adapter<AboutMeRecycleViewHolder> {
@@ -52,7 +56,16 @@ public class AboutMeRecycleViewAdapter extends RecyclerView.Adapter<AboutMeRecyc
                     public void onErrorResponse(VolleyError error) {
                         Log.v("TEST" , "request failed");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type" , "application/json");
+                        params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                        return  params;
+                    }
+                };
                 Volley.newRequestQueue(view.getContext()).add(deleteRequest);
 
             }

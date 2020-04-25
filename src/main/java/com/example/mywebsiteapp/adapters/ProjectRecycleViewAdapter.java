@@ -9,16 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mywebsiteapp.R;
+import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.holders.ProjectRecycleViewHolder;
 import com.example.mywebsiteapp.model.ProjectModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProjectRecycleViewAdapter  extends RecyclerView.Adapter<ProjectRecycleViewHolder> {
 
@@ -50,7 +54,16 @@ public class ProjectRecycleViewAdapter  extends RecyclerView.Adapter<ProjectRecy
                     public void onErrorResponse(VolleyError error) {
                         Log.v("TEST" , "project delete failed");
                     }
-                });
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type" , "application/json");
+                        params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                        return  params;
+                    }
+                };
                 Volley.newRequestQueue(view.getContext()).add(deleteProject);
             }
         });

@@ -8,12 +8,14 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
 import com.android.volley.toolbox.Volley;
+import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.dialogFragments.AboutMeUpdateDialogFragment;
 import com.example.mywebsiteapp.fragments.AboutMeRecycleViewFragment;
 import com.example.mywebsiteapp.model.AboutMeModel;
@@ -23,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AboutMeService {
     private final String baseUrl="http://10.0.2.2:8181";
@@ -82,7 +86,18 @@ public class AboutMeService {
             public void onErrorResponse(VolleyError error) {
                 Log.v("TEST" , error.toString());
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type" , "application/json");
+                params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                return  params;
+            }
+        };
+
+
         Volley.newRequestQueue(context).add(getAboutMe);
         Log.v("TEST" , aboutMeModelsServer.toString());
         return aboutMeModelsServer;

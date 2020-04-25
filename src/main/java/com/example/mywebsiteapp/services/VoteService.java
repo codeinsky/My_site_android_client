@@ -5,11 +5,13 @@ import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.dialogFragments.VotesReportDialogFragment;
 import com.example.mywebsiteapp.fragments.VoteRecycleViewFragment;
 import com.example.mywebsiteapp.model.VoteModel;
@@ -19,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class VoteService {
     private final String baseUrl = "http://10.0.2.2:8181";
@@ -69,7 +73,16 @@ public class VoteService {
             public void onErrorResponse(VolleyError error) {
                 Log.v("TEST" , "request failed");
             }
-        });
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type" , "application/json");
+                params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                return  params;
+            }
+        };
         Volley.newRequestQueue(context).add(getVotesServer);
     }
 }
