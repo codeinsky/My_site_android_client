@@ -25,6 +25,7 @@ import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.fragments.AboutMeRecycleViewFragment;
 import com.example.mywebsiteapp.fragments.ProjectRecycleViewFragment;
 import com.example.mywebsiteapp.services.ProjectsService;
+import com.example.mywebsiteapp.services.UrlsStrings;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,7 +78,7 @@ public class ProjectsUpdateDialogFragment extends DialogFragment {
                                          projectLinks.getText().toString() + " , " +
                                          projectSystems.getText().toString());
 
-                JsonObjectRequest createProject = new JsonObjectRequest(Request.Method.POST, url, projectBody, new Response.Listener<JSONObject>() {
+                JsonObjectRequest createProject = new JsonObjectRequest(Request.Method.POST, UrlsStrings.baseUrlSetProject, projectBody, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.v("TEST" , "Project created");

@@ -29,8 +29,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AboutMeService {
-    private final String baseUrl="http://10.0.2.2:8181";
-    private final String getAboutMeUrl = "/android/getallaboutme";
     public static  ArrayList<AboutMeModel> aboutMeModelsServer = new ArrayList<>();
 
 
@@ -54,8 +52,7 @@ public class AboutMeService {
     //http://localhost:8181/android/getallaboutme
     public  ArrayList<AboutMeModel> getAboutMeServer(final Context context , final Fragment fragment){
         Log.v("TEST", "service started");
-        String url = baseUrl + getAboutMeUrl;
-        JsonArrayRequest getAboutMe = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest getAboutMe = new JsonArrayRequest(Request.Method.GET, UrlsStrings.baseUrlGetAllABoutMe, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 if (response.length()>0) {

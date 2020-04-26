@@ -21,6 +21,8 @@ import com.example.mywebsiteapp.dialogFragments.AboutMeUpdateDialogFragment;
 import com.example.mywebsiteapp.dialogFragments.ProjectsUpdateDialogFragment;
 import com.example.mywebsiteapp.dialogFragments.VisitorReportDialogFragment;
 import com.example.mywebsiteapp.dialogFragments.VotesReportDialogFragment;
+import com.example.mywebsiteapp.services.UrlsStrings;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button visitorReportBtn;
     private Button updateAboutMeBtn;
     private Button updateProjectsBtn;
-    private final String baseURL = "http://10.0.2.2:8181";
-    private final String getVisitorsCountURL = "/android/getvisitorcount";
-    private final String getLikesCountURL    = "/android/getlikescount";
-    private final String getDislikesCountURL = "/android/getdislikescount" ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +100,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void  getVisitorsCountRequest(){
-        String url = baseURL + getVisitorsCountURL;
-        StringRequest getVisitorCount =  new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest getVisitorCount =  new StringRequest(Request.Method.GET, UrlsStrings.baseUrlGetVisitorCount, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 visitorsCountView.setText(response.toString());
@@ -127,8 +125,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void  getLikeCountRequest(){
-        String url = baseURL + getLikesCountURL;
-        StringRequest getLikesCount = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest getLikesCount = new StringRequest(Request.Method.GET, UrlsStrings.baseUrlGetLikesCount, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 likesCountView.setText(response.toString());
@@ -154,8 +151,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getDislikeCountRequest(){
-        String url = baseURL + getDislikesCountURL;
-        StringRequest getDislikesRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest getDislikesRequest = new StringRequest(Request.Method.GET, UrlsStrings.baseUrlGetDisLikesCount, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 dislikesCountView.setText(response.toString());

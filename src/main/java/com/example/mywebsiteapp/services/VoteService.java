@@ -25,8 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VoteService {
-    private final String baseUrl = "http://10.0.2.2:8181";
-    private final String getVoteUrl= "/android/getallvotes";
     private static VoteService VoteService = new VoteService();
     public static ArrayList<VoteModel> votesFromServer = new ArrayList<>();
     public static VoteService getInstance(){
@@ -47,8 +45,7 @@ public class VoteService {
     }
 
     public void getVotesFromServer(Context context , final Fragment fragment){
-        String url = baseUrl + getVoteUrl;
-        JsonArrayRequest getVotesServer = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest getVotesServer = new JsonArrayRequest(Request.Method.GET, UrlsStrings.baseUrlGetAllVotes, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                     for(int i=0 ; i < response.length() ; i++){

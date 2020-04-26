@@ -25,8 +25,6 @@ import java.util.Map;
 
 public class VisitorService {
 
-    private final String baseUrl = "http://10.0.2.2:8181";
-    private final String getVisitorsUrl = "/android/getallvisitors";
     public static ArrayList<VisitorModel> visitorsFromServer = new ArrayList<>();
 
     private static VisitorService visitorService = new VisitorService();
@@ -52,8 +50,7 @@ public class VisitorService {
     }
 
     public void getVisitorsServer(Context context , final Fragment fragment){
-        String url = baseUrl + getVisitorsUrl;
-        JsonArrayRequest visitorRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest visitorRequest = new JsonArrayRequest(Request.Method.GET, UrlsStrings.baseUrlGetAllVisitors, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.v("TEST", "Success");

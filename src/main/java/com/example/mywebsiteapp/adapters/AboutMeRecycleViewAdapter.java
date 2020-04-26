@@ -19,6 +19,7 @@ import com.example.mywebsiteapp.R;
 import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.holders.AboutMeRecycleViewHolder;
 import com.example.mywebsiteapp.model.AboutMeModel;
+import com.example.mywebsiteapp.services.UrlsStrings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ public class AboutMeRecycleViewAdapter extends RecyclerView.Adapter<AboutMeRecyc
             @Override
             public void onClick(View v) {
                 Log.v("TEST" , "delete " + id.getText().toString());
-                String url = baseUr + urlDeleteAboutMe + id.getText().toString();
+                String url = UrlsStrings.baseUrlDeleteAboutMe+ id.getText().toString();
 
                 StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
                     @Override

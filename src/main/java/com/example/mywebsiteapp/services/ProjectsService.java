@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProjectsService {
-    private final String baseUrl="http://10.0.2.2:8181";
-    public final String getAllProjectsUrl = "/android/getallprojects";
     public static ArrayList<ProjectModel>  projectsFromServer = new ArrayList<>();
     private static ProjectsService projectsService = new ProjectsService();
     public  static ProjectsService getInstance(){
@@ -47,8 +45,7 @@ public class ProjectsService {
     }
 
     public  void getProjectSFromServer(Context context , final Fragment fragment){
-        String url = baseUrl + getAllProjectsUrl;
-        JsonArrayRequest getProjectsRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest getProjectsRequest = new JsonArrayRequest(Request.Method.GET, UrlsStrings.baseUrlGetAllProjects, null, new Response.Listener<JSONArray>() {
             @Override
                 public void onResponse(JSONArray response) {
                     Log.v("TEST" , "response success:" + response.length());

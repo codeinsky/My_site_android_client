@@ -19,6 +19,7 @@ import com.example.mywebsiteapp.R;
 import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.holders.ProjectRecycleViewHolder;
 import com.example.mywebsiteapp.model.ProjectModel;
+import com.example.mywebsiteapp.services.UrlsStrings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class ProjectRecycleViewAdapter  extends RecyclerView.Adapter<ProjectRecy
             @Override
             public void onClick(View v) {
                 Log.v("TEST" , "Delete project with id: " + id.getText() );
-                String url = baseUrl + deleteProjectUrl + id.getText();
+                String url = UrlsStrings.baseUrlDeleteProject + id.getText();
                 StringRequest deleteProject = new StringRequest(Request.Method.DELETE, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

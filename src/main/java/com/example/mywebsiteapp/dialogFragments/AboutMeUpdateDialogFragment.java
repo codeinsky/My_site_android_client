@@ -25,6 +25,7 @@ import com.example.mywebsiteapp.R;
 import com.example.mywebsiteapp.activities.MainActivity;
 import com.example.mywebsiteapp.fragments.AboutMeRecycleViewFragment;
 import com.example.mywebsiteapp.services.AboutMeService;
+import com.example.mywebsiteapp.services.UrlsStrings;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +35,6 @@ import java.util.Map;
 
 
 public class AboutMeUpdateDialogFragment extends DialogFragment {
-    String setAboutMeUrl = "http://10.0.2.2:8181/android/setaboutme";
     final String aboutMeFragmentTag = "aboutme";
     public AboutMeUpdateDialogFragment aboutMeUpdateDialogFragment = this;
     private EditText section ;
@@ -70,7 +70,7 @@ public class AboutMeUpdateDialogFragment extends DialogFragment {
                     e.printStackTrace();
                 }
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, setAboutMeUrl, obj,
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, UrlsStrings.baseUrlSetAboutMe, obj,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
