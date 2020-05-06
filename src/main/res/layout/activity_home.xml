@@ -7,13 +7,29 @@
     android:background="#def3f8"
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log Out"
         android:layout_margin="5dp"
         android:id="@+id/logOut"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Visitors"
+        android:layout_margin="5dp"
+        android:id="@+id/reset_visitors"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Votes"
+        android:layout_margin="5dp"
+        android:id="@+id/reset_votes"/>
+    </LinearLayout>
+
 
     <TextView
         android:textColor="#4F5C69"

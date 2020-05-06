@@ -2,7 +2,8 @@ package com.example.mywebsiteapp.services;
 
 public class UrlsStrings {
 
-    final static String baseUrl="http://10.0.2.2:8181";
+  //  final static String baseUrl="https://10.0.2.2:8181";
+    final static String baseUrl="http://167.99.118.237:80";
     final static String getVisitorCount="/android/getvisitorcount";
     final static String getLikesCount="/android/getlikescount";
     final static String getDisLikesCount="/android/getdislikescount";
@@ -14,7 +15,11 @@ public class UrlsStrings {
     final static String deleteProject="/android/deleteproject/";
     final static String deleteAboutMe="/android/deleteaboutme/";
     final static String getAllVisitors="/android/getallvisitors";
+    final static String AUTHENTICATE = "/authenticate";
+    final static String resetVotes="/android/resetvisits";
+    final static String resetVisits="/android/resetvotes";
 
+    public final static String baseUrlAuthenticate = baseUrl + AUTHENTICATE;
     public final static String baseUrlGetVisitorCount = baseUrl + getVisitorCount;
     public final static String baseUrlGetLikesCount = baseUrl + getLikesCount;
     public final static String baseUrlGetDisLikesCount = baseUrl + getDisLikesCount;
@@ -26,4 +31,6 @@ public class UrlsStrings {
     public final static String baseUrlDeleteProject = baseUrl + deleteProject;
     public final static String baseUrlDeleteAboutMe = baseUrl + deleteAboutMe;
     public final static String baseUrlGetAllVisitors = baseUrl + getAllVisitors;
+    public final static String baseUrlResetVisitorCount = baseUrl + resetVisits;
+    public final static String baseUrlResetVote = baseUrl + resetVotes;
 }

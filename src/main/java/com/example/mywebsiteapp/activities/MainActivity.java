@@ -17,6 +17,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mywebsiteapp.R;
+import com.example.mywebsiteapp.services.UrlsStrings;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -29,10 +30,7 @@ public class MainActivity extends AppCompatActivity {
     final public static String key="key ";
     public static String jwt ;
     final int passUserLength = 3;
-    final String LOCAL_URL_BASE = "http://10.0.2.2:8181";
-    final String GET_ALL = "/getallvisitors";
-    final String TEST_LINK = "/test";
-    final String AUTHENTICATE = "/authenticate";
+
     private ProgressBar progressBar;
 
 
@@ -66,13 +64,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
         private void login(String username, String password) {
-            String autchenaticateUrl = LOCAL_URL_BASE + AUTHENTICATE;
             JSONObject jsonBody = new JSONObject();
             try {
                 jsonBody.put("username", username);
                 jsonBody.put("password", password);
                 final String loginBody = jsonBody.toString();
-                final StringRequest logInRequest = new StringRequest(Request.Method.POST, autchenaticateUrl, new Response.Listener<String>() {
+                final StringRequest logInRequest = new StringRequest(Request.Method.POST, UrlsStrings.baseUrlAuthenticate, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {

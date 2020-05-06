@@ -3,12 +3,16 @@ package com.example.mywebsiteapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -36,6 +40,8 @@ public class HomeActivity extends AppCompatActivity {
     private Button visitorReportBtn;
     private Button updateAboutMeBtn;
     private Button updateProjectsBtn;
+    private Button resetVisitorCountBtn;
+    private Button resetVoteCountBtn;
 
 
     @Override
@@ -50,12 +56,70 @@ public class HomeActivity extends AppCompatActivity {
         visitorReportBtn = (Button)findViewById(R.id.visitor_report_btn);
         updateAboutMeBtn = (Button)findViewById(R.id.about_me_update_btn);
         updateProjectsBtn = (Button)findViewById(R.id.projects_update_btn);
+        resetVisitorCountBtn = (Button)findViewById(R.id.reset_visitors);
+        resetVoteCountBtn = (Button)findViewById(R.id.reset_votes);
         dislikesCountView.setText("on request");
         visitorsCountView.setText("on request");
         likesCountView.setText("on request");
         getVisitorsCountRequest();
         getLikeCountRequest();
         getDislikeCountRequest();
+
+        resetVisitorCountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringRequest resetVisitorCount = new StringRequest(Request.Method.POST, UrlsStrings.baseUrlResetVisitorCount, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(), "Visitor list deleted" , Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Visitor delete request failed" , Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type" , "application/json");
+                        params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                        return  params;
+                    }
+                };
+                Volley.newRequestQueue(getApplicationContext()).add(resetVisitorCount);
+            }
+        });
+
+        resetVoteCountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringRequest resetVoteCount = new StringRequest(Request.Method.POST, UrlsStrings.baseUrlResetVote, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(), "Vote list deleted" , Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Vote delete request failed" , Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("Content-Type" , "application/json");
+                        params.put("Authorization" , MainActivity.key + MainActivity.jwt);
+                        return  params;
+                    }
+                };
+                Volley.newRequestQueue(getApplicationContext()).add(resetVoteCount);
+            }
+        });
 
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +160,7 @@ public class HomeActivity extends AppCompatActivity {
                 updateProject.show(getSupportFragmentManager().beginTransaction() , "projectsUpdate");
             }
         });
+
 
     }
 
